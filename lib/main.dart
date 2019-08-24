@@ -1,12 +1,24 @@
 import 'dart:async';
+import 'package:camera/camera.dart';
+
 import 'pages/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/homescreen.dart';
 import 'package:flutter/services.dart';
 import 'routing/fade_transition.dart';
+import 'constants/Constant.dart';
+import './pages/CameraHomeScreen.dart';
 
-void main() {
+List<CameraDescription> cameras;
+
+Future<Null> main() async {
   SystemChrome.setEnabledSystemUIOverlays([]);
+
+    try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    //logError(e.code, e.description);
+  }
 
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -20,7 +32,8 @@ void main() {
     ),
     home: new SplashScreen(),
     routes: <String, WidgetBuilder>{
-      '/HomeScreen': (BuildContext context) => new HomeScreen()
+      //'/HomeScreen': (BuildContext context) => new HomeScreen()
+      CAMERA_SCREEN: (BuildContext context) => CameraHomeScreen(cameras),
     },
   ));
 }
