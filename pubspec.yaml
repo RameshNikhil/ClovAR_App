@@ -44,6 +44,9 @@ flutter:
    - lib/assets/images/treeImg/9.png
    - lib/assets/images/treeImg/10.png
 
+   - lib/assets/images/ic_switch_camera_3.png
+   - lib/assets/images/ic_shutter_1.png
+
   fonts:
     - family: Quicksand
       fonts:

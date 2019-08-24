@@ -19,9 +19,6 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => new _MainPageState();
 }
 
-
-
-
 // class HomeScreen extends StatefulWidget {
 //   HomeScreen();
 
@@ -30,7 +27,6 @@ class MainPage extends StatefulWidget {
 //     return _HomeScreenState();
 //   }
 // }
-
 
 // class _HomeScreenState extends State<HomeScreen> {
 //   String _imagePath;
@@ -70,7 +66,7 @@ class MainPage extends StatefulWidget {
 //           color: Colors.grey,
 //           child: Column(
 //             mainAxisAlignment: MainAxisAlignment.center,
-//             children: <Widget>[              
+//             children: <Widget>[
 //               Image.asset(
 //                 _assetImagePath,
 //                 //fit: BoxFit.fill,
@@ -183,15 +179,7 @@ class MainPage extends StatefulWidget {
 //   }
 // }
 
-
-
-
-
-
-
-
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-
   String _imagePath;
   Widget image;
   double _headerHeight = 320.0;
@@ -258,11 +246,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           Icons.photo_camera,
           size: 25,
         ),
-        onPressed: (){
-
+        onPressed: () {
           Navigator.push(context, FadeRouteBuilder(page: HomeScreenX()));
-
-
         },
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
@@ -272,7 +257,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       ),
     );
   }
-
 
   // Future _openCamera() async {
   //   final imagePath = await Navigator.of(context).pushNamed(CAMERA_SCREEN);
@@ -293,7 +277,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   //   }
   // }
 
-  
 }
 
 class Content extends StatelessWidget {
@@ -303,7 +286,18 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var counter = 10;
-    var treeList = ["Wallnut", "Beech", "Eukalyptus", "Chestnut", "Aspen", "Elm", "Poplar", "Pine", "Acacia", "Palm"];
+    var treeList = [
+      "Wallnut",
+      "Beech",
+      "Eukalyptus",
+      "Chestnut",
+      "Aspen",
+      "Elm",
+      "Poplar",
+      "Pine",
+      "Acacia",
+      "Palm"
+    ];
     final score = ["4", "6", "1", "5", "8", "4", "9", "2", "6", "3"];
 
     var treeImgOne = "lib/assets/images/treeImg/1.png";
@@ -317,8 +311,18 @@ class Content extends StatelessWidget {
     var treeImgNine = "lib/assets/images/treeImg/9.png";
     var treeImgTen = "lib/assets/images/treeImg/10.png";
 
-    var treeImgList = [treeImgOne, treeImgTwo, treeImgThree, treeImgFour, treeImgFive, treeImgSix, treeImgSeven, treeImgEight, treeImgNine, treeImgTen];
-
+    var treeImgList = [
+      treeImgOne,
+      treeImgTwo,
+      treeImgThree,
+      treeImgFour,
+      treeImgFive,
+      treeImgSix,
+      treeImgSeven,
+      treeImgEight,
+      treeImgNine,
+      treeImgTen
+    ];
 
     return Padding(
       padding: EdgeInsets.all(0.0),
@@ -329,15 +333,13 @@ class Content extends StatelessWidget {
         mainAxisSpacing: 32.0,
         crossAxisSpacing: 16.0,
         children: <Widget>[
-
-           for (int i = 1; i < counter; i++)
+          for (int i = 1; i < counter; i++)
             Cards(
               title: treeList[i],
               score: score[i],
               treeImg: treeImgList[i],
               curve: 10.0,
             )
-
         ],
       ),
     );
@@ -347,10 +349,15 @@ class Content extends StatelessWidget {
 class Cards extends StatefulWidget {
   var title;
   double curve;
-  String score; 
+  String score;
   var treeImg;
 
-  Cards({Key key, @required this.title, @required this.curve, @required this.score, @required this.treeImg})
+  Cards(
+      {Key key,
+      @required this.title,
+      @required this.curve,
+      @required this.score,
+      @required this.treeImg})
       : super(key: key);
 
   @override
@@ -381,16 +388,15 @@ class _CardsState extends State<Cards> {
                   //   ),
                   // ),
                   content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image.asset(widget.treeImg), 
-                        Text("Tree Name"), 
-                        Text("Information"), 
-                        Text("Score"), 
-
-                      ],
-                    ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(widget.treeImg),
+                      Text("Tree Name"),
+                      Text("Information"),
+                      Text("Score"),
+                    ],
+                  ),
                   actions: <Widget>[
                     // usually buttons at the bottom of the dialog
 
@@ -406,7 +412,7 @@ class _CardsState extends State<Cards> {
                       },
                     ),
 
-                      new FlatButton(
+                    new FlatButton(
                       child: new Text(
                         "Cancel",
                         // style: TextStyle(
@@ -417,7 +423,6 @@ class _CardsState extends State<Cards> {
                         Navigator.of(context).pop();
                       },
                     ),
-                  
                   ],
                 );
               });
@@ -444,47 +449,43 @@ class _CardsState extends State<Cards> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-
-                  Image.asset(widget.treeImg), 
-
-
-
-              Align(
-              alignment: FractionalOffset(0.1, 0.95),
-              child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Text(
-                widget.title,
-                style: new TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-
-              new Text(
-                widget.score,
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.yellow,
-                  //fontWeight: FontWeight.w700,
-                ),
-              ),
-              ],
-            ),
-            ),
-
+                  Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: Center(
+                      child: Image.asset(
+                        widget.treeImg,
+                        height: 130,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Text(
+                          widget.title,
+                          style: new TextStyle(
+                            fontSize: 24.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        new Text(
+                          widget.score,
+                          style: new TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.yellow,
+                            //fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
-              ), 
-              
-
+              ),
             ),
-            
-           
-            
-          
-            
+
             // new Align(
             //   alignment: FractionalOffset(0.1, 0.95),
             //   child: new Text(
@@ -496,8 +497,6 @@ class _CardsState extends State<Cards> {
             //     ),
             //   ),
             // ),
-
-
           ),
         ),
       ),
@@ -511,5 +510,3 @@ class _CardsState extends State<Cards> {
     );
   }
 }
-
- 
