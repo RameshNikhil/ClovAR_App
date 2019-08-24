@@ -302,8 +302,23 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var treeList = ["Oak", "Birch", "Eukalyptus", "Willow", "Aloe Vera", "Rosewood", "Japanese Maple", "Cork", "Ceedar", "Banksia"];
-    var treeImg = ["Tree"];
+    var counter = 10;
+    var treeList = ["Wallnut", "Beech", "Eukalyptus", "Chestnut", "Aspen", "Elm", "Poplar", "Pine", "Acacia", "Palm"];
+    final score = ["4", "6", "1", "5", "8", "4", "9", "2", "6", "3"];
+
+    var treeImgOne = "lib/assets/images/treeImg/1.png";
+    var treeImgTwo = "lib/assets/images/treeImg/2.png";
+    var treeImgThree = "lib/assets/images/treeImg/3.png";
+    var treeImgFour = "lib/assets/images/treeImg/4.png";
+    var treeImgFive = "lib/assets/images/treeImg/5.png";
+    var treeImgSix = "lib/assets/images/treeImg/6.png";
+    var treeImgSeven = "lib/assets/images/treeImg/7.png";
+    var treeImgEight = "lib/assets/images/treeImg/8.png";
+    var treeImgNine = "lib/assets/images/treeImg/9.png";
+    var treeImgTen = "lib/assets/images/treeImg/10.png";
+
+    var treeImgList = [treeImgOne, treeImgTwo, treeImgThree, treeImgFour, treeImgFive, treeImgSix, treeImgSeven, treeImgEight, treeImgNine, treeImgTen];
+
 
     return Padding(
       padding: EdgeInsets.all(0.0),
@@ -314,11 +329,15 @@ class Content extends StatelessWidget {
         mainAxisSpacing: 32.0,
         crossAxisSpacing: 16.0,
         children: <Widget>[
-          for (String i in treeList)
+
+           for (int i = 1; i < counter; i++)
             Cards(
-              title: i,
+              title: treeList[i],
+              score: score[i],
+              treeImg: treeImgList[i],
               curve: 10.0,
             )
+
         ],
       ),
     );
@@ -328,8 +347,10 @@ class Content extends StatelessWidget {
 class Cards extends StatefulWidget {
   var title;
   double curve;
+  String score; 
+  var treeImg;
 
-  Cards({Key key, @required this.title, @required this.curve})
+  Cards({Key key, @required this.title, @required this.curve, @required this.score, @required this.treeImg})
       : super(key: key);
 
   @override
@@ -350,36 +371,53 @@ class _CardsState extends State<Cards> {
               builder: (BuildContext context) {
                 // return object of type Dialog
                 return AlertDialog(
-                  titlePadding: EdgeInsets.fromLTRB(20, 300, 20, 20),
+                  titlePadding: EdgeInsets.fromLTRB(20, 100, 20, 20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  title: new Text(
-                    "Delete?",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                  // title: new Text(
+                  //   "Delete?",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
+                  content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(widget.treeImg), 
+                        Text("Tree Name"), 
+                        Text("Information"), 
+                        Text("Score"), 
+
+                      ],
                     ),
-                  ),
-                  //content: new Text("Alert Dialog body"),
                   actions: <Widget>[
                     // usually buttons at the bottom of the dialog
 
                     new FlatButton(
-                      child: new Text("Delete"),
-                      onPressed: () {
-                        //delete function
-                      },
-                    ),
-                    new FlatButton(
                       child: new Text(
-                        "Cancel",
+                        "AR",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       onPressed: () {
+                        //delete function
+                      },
+                    ),
+
+                      new FlatButton(
+                      child: new Text(
+                        "Cancel",
+                        // style: TextStyle(
+                        //   fontWeight: FontWeight.bold,
+                        // ),
+                      ),
+                      onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
+                  
                   ],
                 );
               });
@@ -401,9 +439,22 @@ class _CardsState extends State<Cards> {
                 ],
               ),
             ),
-            child: new Align(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+
+                  Image.asset(widget.treeImg), 
+
+
+
+              Align(
               alignment: FractionalOffset(0.1, 0.95),
-              child: new Text(
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
                 widget.title,
                 style: new TextStyle(
                   fontSize: 24.0,
@@ -411,7 +462,42 @@ class _CardsState extends State<Cards> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
+
+              new Text(
+                widget.score,
+                style: new TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.yellow,
+                  //fontWeight: FontWeight.w700,
+                ),
+              ),
+              ],
             ),
+            ),
+
+                ],
+              ), 
+              
+
+            ),
+            
+           
+            
+          
+            
+            // new Align(
+            //   alignment: FractionalOffset(0.1, 0.95),
+            //   child: new Text(
+            //     widget.title,
+            //     style: new TextStyle(
+            //       fontSize: 24.0,
+            //       color: Colors.white,
+            //       fontWeight: FontWeight.w700,
+            //     ),
+            //   ),
+            // ),
+
+
           ),
         ),
       ),
