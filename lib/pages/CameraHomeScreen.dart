@@ -1,0 +1,301 @@
+import 'dart:async';
+import 'dart:io';
+import 'dart:convert';
+import 'package:camera/camera.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart';
+import 'package:flutter/material.dart';
+
+class CameraHomeScreen extends StatefulWidget {
+  List<CameraDescription> cameras;
+
+  CameraHomeScreen(this.cameras);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CameraHomeScreenState();
+  }
+}
+
+class _CameraHomeScreenState extends State<CameraHomeScreen> {
+  String imagePath;
+  int counter = 0;
+  bool _toggleCamera = false;
+  CameraController controller;
+
+  @override
+  void initState() {
+    try {
+      onCameraSelected(widget.cameras[0]);
+    } catch (e) {
+      print(e.toString());
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.cameras.isEmpty) {
+      return Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+          'No Camera Found',
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+
+    if (!controller.value.isInitialized) {
+      return Container(
+      );
+    }
+
+    return AspectRatio(
+      aspectRatio: controller.value.aspectRatio,
+      child: Container(
+        child: Stack(
+          children: <Widget>[
+            CameraPreview(controller),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: double.infinity,
+                height: 120.0,
+                padding: EdgeInsets.all(20.0),
+                color: Color.fromRGBO(00, 00, 00, 0.0),
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          onTap: () {
+                            _captureImage();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(4.0),
+                            child: Image.asset(
+                              'assets/images/ic_shutter_1.png',
+                              width: 72.0,
+                              height: 72.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          onTap: () {
+                    Navigator.pop(context, imagePath);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(4.0),
+                            child: Image.asset(
+                              'assets/images/ic_switch_camera_3.png',
+                              color: Colors.grey[200],
+                              width: 42.0,
+                              height: 42.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+
+  }
+
+  void onCameraSelected(CameraDescription cameraDescription) async {
+    if (controller != null) await controller.dispose();
+    controller = CameraController(cameraDescription, ResolutionPreset.medium);
+
+    controller.addListener(() {
+      if (mounted) setState(() {});
+      if (controller.value.hasError) {
+        showMessage('Camera Error: ${controller.value.errorDescription}');
+      }
+    });
+
+    try {
+      await controller.initialize();
+    } on CameraException catch (e) {
+      showException(e);
+    }
+
+    if (mounted) setState(() {});
+  }
+
+  String timestamp() => new DateTime.now().millisecondsSinceEpoch.toString();
+
+  void _captureImage() {
+    takePicture().then((String filePath) {
+      if (mounted) {
+        setState(() {
+          imagePath = filePath;
+        });
+        if (filePath != null) {
+          showMessage('Picture saved to $filePath');
+          setCameraResult();
+        }
+      }
+    });
+  }
+
+  void setCameraResult() {
+      //Navigator.pop(context, imagePath);
+      print(this.counter);
+      _showDialog(imagePath, this.counter);
+  }
+
+  void _showDialog(imagePath, oldCounter) {
+
+    File imgFile = File(imagePath);
+    List<int> imageBytes = imgFile.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
+
+    // make GET request
+    Uri uri = new Uri.http('5f4d2762.ngrok.io', '/', {"counter": oldCounter.toString(), "image":"{base64Image}"});
+    print(uri.toString());
+    get(uri.toString()).then((response){
+      print(response.body);// flutter defined function
+      
+      var object = json.decode(response.body);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return 
+        ConstrainedBox(
+          constraints: BoxConstraints(minHeight: 1000.0),
+          child:
+          AlertDialog(
+          contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+          backgroundColor: Colors.grey,
+          shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.all(Radius.circular(10.0))
+               ),
+          title: new Text(object['name']),
+          // content: new Text(object['description']),
+           content: new 
+          Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Image.network(
+          'https://picsum.photos/250?image=9',
+        ),  
+                      Container(
+                        child: Text(
+                          "message",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          FlatButton(
+                              child: Text('Yes'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }),
+                          FlatButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              })
+                        ])
+                    ],
+                  ),
+                
+          actions: 
+          
+          <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          
+        )
+        );
+      },
+    );
+    });
+
+     int newCounter = (oldCounter +1) % 3;
+   
+    setState(() {
+          counter = newCounter;
+        });
+
+    print(newCounter);
+
+
+    
+  }
+
+  Future<String> takePicture() async {
+    if (!controller.value.isInitialized) {
+      showMessage('Error: select a camera first.');
+      return null;
+    }
+    final Directory extDir = await getApplicationDocumentsDirectory();
+    final String dirPath = '${extDir.path}/FlutterDevs/Camera/Images';
+    await new Directory(dirPath).create(recursive: true);
+    final String filePath = '$dirPath/${timestamp()}.jpg';
+
+    if (controller.value.isTakingPicture) {
+      // A capture is already pending, do nothing.
+      return null;
+    }
+
+    try {
+      await controller.takePicture(filePath);
+    } on CameraException catch (e) {
+      showException(e);
+      return null;
+    }
+    return filePath;
+  }
+
+  void showException(CameraException e) {
+    logError(e.code, e.description);
+    showMessage('Error: ${e.code}\n${e.description}');
+  }
+
+  void showMessage(String message) {
+    print(message);
+  }
+
+  void logError(String code, String message) =>
+      print('Error: $code\nMessage: $message');
+}

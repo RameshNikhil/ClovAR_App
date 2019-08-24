@@ -58,21 +58,21 @@ class _SplashScreenState extends State<SplashScreen> {
           end: Alignment(-1.0, -1.0),
           stops: [0.1, 0.9],
           colors: [
-            Color(0xffd9e198),
-            Color(0xffafedfc),
+            Color(0xffcab697),
+            Color(0xffbbc6d9),
           ],
         ),
       ),
       child: new Stack(
         children: <Widget>[
           Container(
-      alignment: Alignment.bottomLeft,
-      padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
-      // child: new Image.asset(
-      //   'lib/assets/images/logoFull.png',
-      //   height: 150,
-      // ),
-      child: Text("Have clover logo"),
+      alignment: Alignment.center,
+      //padding: EdgeInsets.only(bottom: 40.0, left: 30.0),
+      child: new Image.asset(
+        'lib/assets/images/logoFull.png',
+        height: 350,
+      ),
+      // child: Text("Have clover logo"),
     ),
         ],
       ),

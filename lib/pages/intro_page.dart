@@ -11,9 +11,9 @@ class IntroPage extends StatelessWidget {
 
     PageController _controller = PageController();
 
-    TextEditingController nameController = new TextEditingController();
-    TextEditingController emailController = new TextEditingController();
-    TextEditingController passwordController = new TextEditingController();
+    final nameController = TextEditingController();
+    String userName;
+    String nameToSend;
 
 
     return PageView(
@@ -47,48 +47,33 @@ class IntroPage extends StatelessWidget {
                     ShowUp(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 32.0),
-                        child:
-                            Text("Welcome to Clover.",
-                                style: TextStyle(
-                                  fontSize: 32.0,
-                                  //fontFamily: "Montserrat",
-                                  color: Colors.black,
-                                )),
-                      ),
-                      delay: delayAmount * 3,
-                    ),
-                    ShowUp(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 32.0),
                         child: Text(
-                            "Go find your plants.",
+                            "Welcome to ClovAR.",
                             style: TextStyle(
                               fontSize: 32.0,
                               //fontFamily: "Montserrat",
                               color: Colors.black,
                             )),
                       ),
-                      delay: delayAmount * 6,
+                      delay: delayAmount * 3,
                     ),
-
-
 
                       ShowUp(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        "Let's start with your name",
+                        "Let's begin with your name:",
                         style: TextStyle(
                           fontSize: 30.0,
                           color: Colors.black,
                         ),
                       ),
                     ),
-                    delay: delayAmount * 8,
+                    delay: delayAmount * 6,
                   ),
                   ShowUp(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
+                      padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 0.0),
                       child: TextField(
                         decoration: InputDecoration(
                             border: InputBorder.none, 
@@ -100,7 +85,7 @@ class IntroPage extends StatelessWidget {
                         controller: nameController,
                       ),
                     ),
-                    delay: delayAmount * 10,
+                    delay: delayAmount * 8,
                   ),
 
                   ],
@@ -110,12 +95,19 @@ class IntroPage extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
              onPressed: () {
+              userName = nameController.text;
+              if(userName.isEmpty){
+                nameToSend = "User";
+              } else {
+                nameToSend = userName;
+              }
+              
               Navigator.pushReplacement(
-                  context, FadeRouteBuilder(page: HomeScreen()));
+                  context, FadeRouteBuilder(page: HomeScreen(userName: nameToSend,)));
             },
             child: ShowUp(
               child: Icon(Icons.keyboard_arrow_down),
-              delay: delayAmount * 12,
+              delay: delayAmount * 10,
             ),
             elevation: 0,
             foregroundColor: Colors.black,
