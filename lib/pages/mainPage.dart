@@ -1,3 +1,4 @@
+import 'package:clover_app/routing/fade_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
@@ -7,6 +8,8 @@ import '../constants/Constant.dart';
 
 import 'dart:async';
 import 'dart:io';
+
+import 'HomeScreen copy.dart';
 
 class MainPage extends StatefulWidget {
   String userName;
@@ -255,7 +258,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           Icons.photo_camera,
           size: 25,
         ),
-        onPressed: _openCamera,
+        onPressed: (){
+
+          Navigator.push(context, FadeRouteBuilder(page: HomeScreenX()));
+
+
+        },
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -266,24 +274,24 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
 
-  Future _openCamera() async {
-    final imagePath = await Navigator.of(context).pushNamed(CAMERA_SCREEN);
+  // Future _openCamera() async {
+  //   final imagePath = await Navigator.of(context).pushNamed(CAMERA_SCREEN);
 
-    setState(() {
-      _imagePath = imagePath;
-    });
+  //   setState(() {
+  //     _imagePath = imagePath;
+  //   });
 
-    if (imagePath != null) {
-      print("$imagePath");
+  //   if (imagePath != null) {
+  //     print("$imagePath");
 
-      image = Image.file(
-        File(imagePath),
-        height: _headerHeight,
-        width: double.infinity,
-        fit: BoxFit.cover,
-      );
-    }
-  }
+  //     image = Image.file(
+  //       File(imagePath),
+  //       height: _headerHeight,
+  //       width: double.infinity,
+  //       fit: BoxFit.cover,
+  //     );
+  //   }
+  // }
 
   
 }
