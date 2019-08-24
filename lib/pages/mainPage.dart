@@ -246,9 +246,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           Icons.photo_camera,
           size: 25,
         ),
-        onPressed: () {
-          Navigator.push(context, FadeRouteBuilder(page: HomeScreenX()));
-        },
+        // onPressed: (){
+
+        //   Navigator.push(context, FadeRouteBuilder(page: HomeScreenX()));
+
+
+        // },
+        onPressed: _openCamera,
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -258,24 +262,25 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     );
   }
 
-  // Future _openCamera() async {
-  //   final imagePath = await Navigator.of(context).pushNamed(CAMERA_SCREEN);
 
-  //   setState(() {
-  //     _imagePath = imagePath;
-  //   });
+  Future _openCamera() async {
+    final imagePath = await Navigator.of(context).pushNamed(CAMERA_SCREEN);
 
-  //   if (imagePath != null) {
-  //     print("$imagePath");
+    setState(() {
+      _imagePath = imagePath;
+    });
 
-  //     image = Image.file(
-  //       File(imagePath),
-  //       height: _headerHeight,
-  //       width: double.infinity,
-  //       fit: BoxFit.cover,
-  //     );
-  //   }
-  // }
+    if (imagePath != null) {
+      print("$imagePath");
+
+      image = Image.file(
+        File(imagePath),
+        height: _headerHeight,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      );
+    }
+  }
 
 }
 
