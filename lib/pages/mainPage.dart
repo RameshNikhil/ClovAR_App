@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import './CameraHomeScreen.dart';
 import '../constants/Constant.dart';
 import './ARWebView.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -458,7 +459,7 @@ class _CardsState extends State<Cards> {
                         ),
                       ),
                       onPressed: () {
-                         Navigator.push(context, FadeRouteBuilder(page: ARWebView(name: widget.title)));
+                           launch("https://635b50d2.ngrok.io/"+widget.title+".html");
                       },
                     ),
 
