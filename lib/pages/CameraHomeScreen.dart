@@ -187,66 +187,71 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return 
-        ConstrainedBox(
-          constraints: BoxConstraints(minHeight: 1000.0),
-          child:
-          AlertDialog(
-          contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-          backgroundColor: Colors.grey,
-          shape: RoundedRectangleBorder(
-                   borderRadius: BorderRadius.all(Radius.circular(10.0))
-               ),
-          title: new Text(object['name']),
-          // content: new Text(object['description']),
-           content: new 
-          Column(
-                    mainAxisSize: MainAxisSize.min,
+        return AlertDialog(
+                  // titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  // title: new Text(
+                  //   "Delete?",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
+                  backgroundColor: Colors.white30,
+                  contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.network(
-          'https://picsum.photos/250?image=9',
-        ),  
-                      Container(
-                        child: Text(
-                          "message",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
+                      Image.asset(object['url']),
+
+                      Padding(
+                        padding: EdgeInsets.only(top:6.0, bottom: 18.0),
+                        child:  Text(
+                        object['name'],
+                        style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          FlatButton(
-                              child: Text('Yes'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              }),
-                          FlatButton(
-                              child: Text('No'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              })
-                        ])
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(top:6.0, bottom: 19.0),
+                        child:  Text(
+                        object['height'],
+                      ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(top:6.0, bottom: 19.0),
+                        child:  Text(
+                          "Plant Rarity Score: " +
+                        object['score'],
+                        style: TextStyle(
+                          color: Colors.orange,
+                        ),
+                      ),
+                      ),
+
                     ],
                   ),
-                
-          actions: 
-          
-          <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-          
-        )
-        );
+                  actions: <Widget>[
+                    // usually buttons at the bottom of the dialog
+
+                    new FlatButton(
+                      child: new Text(
+                        "Cancel",
+                        // style: TextStyle(
+                        //   fontWeight: FontWeight.bold,
+                        // ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
       },
     );
     });

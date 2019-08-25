@@ -299,7 +299,7 @@ class Content extends StatelessWidget {
       "Chestnut",
       "Aspen",
       "Elm",
-      "Poplar",
+      "Populus",
       "Pine",
       "Acacia",
       "Palm"
@@ -330,6 +330,19 @@ class Content extends StatelessWidget {
       treeImgTen
     ];
 
+    var treeInfo = [
+      "Beech is a genus of deciduous trees in the family Fagaceae, native to temperate Europe, Asia, and North America. Recent classification systems of the genus recognize 10 to 13 species in two distinct subgenera, Engleriana and Fagus.",
+      "Beech is a genus of deciduous trees in the family Fagaceae, native to temperate Europe, Asia, and North America. Recent classification systems of the genus recognize 10 to 13 species in two distinct subgenera, Engleriana and Fagus.",
+      "Eucalyptus is a genus of over seven hundred species of flowering trees, shrubs or mallees in the myrtle family, Myrtaceae. Along with other genera in the tribe Eucalypteae, they are commonly known as eucalypts.",
+      "The chestnuts are a group of eight or nine species of deciduous trees and shrubs in the genus Castanea, in the beech family Fagaceae. They are native to temperate regions of the Northern Hemisphere. The name also refers to the edible nuts they produce.",
+      "Aspen is a common name for certain tree species; some, but not all, are classified by botanists in the section Populus, of the Populus genus.",
+      "Elms are deciduous and semi-deciduous trees comprising the flowering plant genus Ulmus in the plant family Ulmaceae. The genus first appeared in the Miocene geological period about 20 million years ago, originating in what is now central Asia.",
+      "Populus is a genus of 25–35 species of deciduous flowering plants in the family Salicaceae, native to most of the Northern Hemisphere. English names variously applied to different species include poplar, aspen, and cottonwood.",
+      "A pine is any conifer in the genus Pinus of the family Pinaceae. Pinus is the sole genus in the subfamily Pinoideae. The Plant List compiled by the Royal Botanic Gardens, Kew and Missouri Botanical Garden accepts 126 species names of pines as...",
+      "Acadia has over 1100 vascular plant species that represent a wide diversity of plant life adapted to thrive in acidic, low nutrient bogs and rocky, treeless mountain summits.",
+      "The Arecaceae are a botanical family of perennial plants. Their growth form can be climbers, shrubs, trees and stemless plants, all commonly known as palms. Those having a tree form are colloquially called palm trees.",
+    ];
+
     return Padding(
       padding: EdgeInsets.all(0.0),
       child: GridView.count(
@@ -344,6 +357,7 @@ class Content extends StatelessWidget {
               title: treeList[i],
               score: score[i],
               treeImg: treeImgList[i],
+              treeInfo: treeInfo[i],
               curve: 10.0,
             )
         ],
@@ -357,10 +371,12 @@ class Cards extends StatefulWidget {
   double curve;
   String score;
   var treeImg;
+  var treeInfo;
 
   Cards(
       {Key key,
       @required this.title,
+      @required this.treeInfo,
       @required this.curve,
       @required this.score,
       @required this.treeImg})
@@ -384,7 +400,7 @@ class _CardsState extends State<Cards> {
               builder: (BuildContext context) {
                 // return object of type Dialog
                 return AlertDialog(
-                  titlePadding: EdgeInsets.fromLTRB(20, 100, 20, 20),
+                  // titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   // title: new Text(
@@ -393,14 +409,42 @@ class _CardsState extends State<Cards> {
                   //     fontWeight: FontWeight.w600,
                   //   ),
                   // ),
+                  contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0),
                   content: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image.asset(widget.treeImg),
-                      Text("Tree Name"),
-                      Text("Information"),
-                      Text("Score"),
+
+                      Padding(
+                        padding: EdgeInsets.only(top:6.0, bottom: 18.0),
+                        child:  Text(
+                        widget.title,
+                        style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(top:6.0, bottom: 19.0),
+                        child:  Text(
+                        widget.treeInfo,
+                      ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(top:6.0, bottom: 19.0),
+                        child:  Text(
+                          "Plant Rarity Score: " +
+                        widget.score,
+                        style: TextStyle(
+                          color: Colors.orange,
+                        ),
+                      ),
+                      ),
+
                     ],
                   ),
                   actions: <Widget>[
@@ -414,7 +458,7 @@ class _CardsState extends State<Cards> {
                         ),
                       ),
                       onPressed: () {
-                         Navigator.push(context, FadeRouteBuilder(page: ARWebView(name: "eucalyptus")));
+                         Navigator.push(context, FadeRouteBuilder(page: ARWebView(name: widget.title)));
                       },
                     ),
 
