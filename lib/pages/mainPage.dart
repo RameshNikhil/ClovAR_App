@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import './CameraHomeScreen.dart';
 import '../constants/Constant.dart';
+import './ARWebView.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -413,7 +414,7 @@ class _CardsState extends State<Cards> {
                         ),
                       ),
                       onPressed: () {
-                        //delete function
+                         Navigator.push(context, FadeRouteBuilder(page: ARWebView(name: "eucalyptus")));
                       },
                     ),
 
