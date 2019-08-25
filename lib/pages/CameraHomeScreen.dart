@@ -197,7 +197,7 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
                   //     fontWeight: FontWeight.w600,
                   //   ),
                   // ),
-                  backgroundColor: Colors.white30,
+                  backgroundColor: Colors.white,
                   contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 0),
                   content: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
