@@ -47,6 +47,12 @@ flutter:
    - lib/assets/images/ic_switch_camera_3.png
    - lib/assets/images/ic_shutter_1.png
 
+   - lib/assets/images/dp/1.jpg
+   - lib/assets/images/dp/2.jpg
+   - lib/assets/images/dp/3.jpg
+   - lib/assets/images/dp/4.jpg
+   - lib/assets/images/dp/5.jpg
+
   fonts:
     - family: Quicksand
       fonts:

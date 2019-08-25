@@ -86,23 +86,38 @@ class Content extends StatelessWidget {
     var counter = 6;
 
     var friends = [
+      "x",
+      "Sameer",
+      "Lucas",
       "Izad",
-      "Sameer",
-      "Cindy",
-      "Sameer",
       "Deep",
       "Manvendra",
     ];
 
-    final profileImg = ["one", "two", "three", "four", "five", "six"];
+    //final profileImg = ["x", "two", "three", "four", "five", "six"];
+
+    var treeDPOne = "lib/assets/images/dp/1.jpg";
+    var treeDPTwo = "lib/assets/images/dp/2.jpg";
+    var treeDPThree = "lib/assets/images/dp/3.jpg";
+    var treeDPFour = "lib/assets/images/dp/4.jpg";
+    var treeDPFive = "lib/assets/images/dp/5.jpg";
+
+    var profileImg = [
+      treeDPOne,
+      treeDPOne,
+      treeDPTwo,
+      treeDPThree,
+      treeDPFour,
+      treeDPFive,
+    ];
 
     return Padding(
       padding: EdgeInsets.all(0.0),
       child: GridView.count(
         crossAxisCount: 1,
-        padding: EdgeInsets.fromLTRB(60.0, 28.0, 16.0, 16.0),
+        padding: EdgeInsets.fromLTRB(30.0, 32.0, 16.0, 16.0),
         childAspectRatio: 3.5 / 1.0,
-        mainAxisSpacing: 16.0,
+        mainAxisSpacing: 28.0,
         crossAxisSpacing: 16.0,
         children: <Widget>[
           for (int i = 1; i < counter; i++)
@@ -224,16 +239,24 @@ class _CardsState extends State<Cards> {
           ]),
         ),
 
-        // Image.asset(
-        //       'lib/assets/images/logoFull.png',
-        //       height: 350,
-        //     ),
+
+        // Align(
+        //   alignment: Alignment.centerLeft,
+        //   child: Image.asset(
+        //     widget.profile,
+        //     height: 130,
+        //   ),
+        // ),
+
 
         Align(
-          alignment: Alignment.centerLeft ,
-          child: Text(
-            widget.profile,
-          ),
+          alignment: Alignment.centerLeft,
+          child: CircleAvatar(
+          radius: 50.0,
+          backgroundImage: ExactAssetImage(widget.profile,),
+          // minRadius: 50,
+          // maxRadius: 50,
+        ),
         ),
 
 
