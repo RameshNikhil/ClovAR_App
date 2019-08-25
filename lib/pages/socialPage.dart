@@ -164,7 +164,7 @@ class _CardsState extends State<Cards> {
                   builder: (BuildContext context) {
                     // return object of type Dialog
                     return AlertDialog(
-                      titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 200),
+                      titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                       shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
