@@ -164,16 +164,39 @@ class _CardsState extends State<Cards> {
                   builder: (BuildContext context) {
                     // return object of type Dialog
                     return AlertDialog(
-                      titlePadding: EdgeInsets.fromLTRB(20, 300, 20, 20),
+                      titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                       shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
-                      title: new Text(
-                        "Delete?",
+                      title: 
+                      Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[ Text(
+                        widget.title,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      Text('Last Online 3 hours ago',
+                      style: TextStyle(fontSize: 10)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Text('Total Score: 3800')),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 40),
+                          child:
+                          Column(children: <Widget>[
+                        Image.asset(
+                              'lib/assets/images/treeImg/1.png',
+                              width: 150.0,
+                              height: 150.0,
+                            ),
+                            Text('Name: Great Oak Tree'),
+                            Text('Score: 10', style: TextStyle(color: Colors.orange))
+                           ] )
+                        )
+                      ]),
                       //content: new Text("Alert Dialog body"),
                       actions: <Widget>[
                         // usually buttons at the bottom of the dialog
