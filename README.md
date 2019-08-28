@@ -1,4 +1,4 @@
-# clover_app
+# clovAR_app
 
 ## Our hackthon project built in flutter!
 Our team recognises the decreasing number of children exploring their gardens and communities like we did when we were young. We also recognise that if given the opportunity and encouragement, kids will go out and try to learn about the wonderful exhibition of plants, trees and shrub their environments and we think this is a wonderful experience.
