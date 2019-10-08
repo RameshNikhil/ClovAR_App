@@ -56,7 +56,7 @@ class DotsIndicator extends AnimatedWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  String userName;
+  final String userName;
   HomeScreen({Key key, @required this.userName}) : super(key: key);
 
   @override

@@ -3,7 +3,6 @@ import 'package:camera/camera.dart';
 
 import 'pages/intro_page.dart';
 import 'package:flutter/material.dart';
-import 'pages/homescreen.dart';
 import 'package:flutter/services.dart';
 import 'routing/fade_transition.dart';
 import 'constants/Constant.dart';

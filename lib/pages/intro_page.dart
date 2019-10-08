@@ -2,7 +2,6 @@ import '../routing/fade_transition.dart';
 import '../pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
   @override
